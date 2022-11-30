@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
+// UTILISATION DES MIDDLEWARE A L'AIDE DE LA METHODE USE()
+app.use("/public",express.static("public"))
+
 
 // DECLARATION TEMPLATE ENGINE
 app.set("views", "./views");
@@ -18,7 +21,7 @@ app.get("/movies/add", (req,res)=>{
 
 app.get("/movies/:id", (req,res)=>{
     const id = req.params.id;
-    res.send(`filme numéro ${id}`);
+    res.send(`film numéro ${id}`);
 })
 
 
@@ -26,7 +29,8 @@ app.get("/movies/:id", (req,res)=>{
 app.get("/", (req,res)=>{
 
     // Une fois que la methode "get" est faite il faut une réponse associé et ici on envoie ("send") le string "hello world" 
-    res.send("Hello world")
+    // res.send("Hello world")
+    res.render("Index");
 });
 
 // On écoute sur le port de l'application

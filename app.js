@@ -11,17 +11,25 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 app.get("/movies", (req,res)=>{
-    res.send("Welcome to the movie page")
+    // res.send("Welcome to the movie page")
+    res.render("movies")
 })
 
 // FAIRE ATTENTION A L'ORDRE DES ROUTES
 app.get("/movies/add", (req,res)=>{
-    res.send("Prochainement des trucs ici les bougs");
+    // res.send("Prochainement des trucs ici les bougs");
+    res.render("add")
 })
+
+// app.get("/movies-details", (req,res)=>{
+//     // res.send("Prochainement des trucs ici les bougs");
+//     res.render("details")
+// })
 
 app.get("/movies/:id", (req,res)=>{
     const id = req.params.id;
-    res.send(`film numéro ${id}`);
+    // res.send(`film numéro ${id}`);
+    res.render("details");
 })
 
 

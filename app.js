@@ -1,12 +1,26 @@
-'use strict'
-
 const express = require("express");
 const app = express();
 const PORT = 3000;
 
+
+// DECLARATION TEMPLATE ENGINE
+app.set("views", "./views");
+app.set("view engine", "ejs");
+
 app.get("/movies", (req,res)=>{
     res.send("Welcome to the movie page")
 })
+
+// FAIRE ATTENTION A L'ORDRE DES ROUTES
+app.get("/movies/add", (req,res)=>{
+    res.send("Prochainement des trucs ici les bougs");
+})
+
+app.get("/movies/:id", (req,res)=>{
+    const id = req.params.id;
+    res.send(`filme numéro ${id}`);
+})
+
 
 // La méthode "Get" prend deux parametres le premier sera le chemin dans l'url et le deuxieme sera un callback qui dispose de la requete et de la reponse
 app.get("/", (req,res)=>{

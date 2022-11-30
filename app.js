@@ -29,7 +29,7 @@ app.get("/movies/add", (req,res)=>{
 app.get("/movies/:id", (req,res)=>{
     const id = req.params.id;
     // res.send(`film numéro ${id}`);
-    res.render("details");
+    res.render("details", {movieid:id});
 })
 
 

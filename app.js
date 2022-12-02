@@ -12,7 +12,15 @@ app.set("view engine", "ejs");
 
 app.get("/movies", (req,res)=>{
     // res.send("Welcome to the movie page")
-    res.render("movies")
+    const title = "Films francais de y'a pas lgt mon reuf"
+    const frenchMovies = [
+
+        {title : "Le fabuleux destin", year: 2001},
+        {title : "Terminator", year: 1999},
+        {title : "Saw", year: 2008},
+        {title : "Le diner de cons", year: 2057}
+    ]
+    res.render("movies", {movies:frenchMovies, title:title})
 })
 
 // FAIRE ATTENTION A L'ORDRE DES ROUTES

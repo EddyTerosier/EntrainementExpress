@@ -27,13 +27,13 @@ app.get("/movies", (req,res)=>{
 
 const urlencodedParser = bodyParser.urlencoded({extended:false});
 
+
 app.post("/movies",urlencodedParser, (req,res)=>{
     console.log("Le titre est : ",req.body.movietitle);
     console.log("L'année est : ",req.body.movieyear);
     const newMovie = {title : req.body.movietitle, year : parseInt(req.body.movieyear)};
     frenchMovies = [...frenchMovies,newMovie];
     // frenchMovies.push(newMovie);
-    console.log(frenchMovies);
 
     res.sendStatus(201);
 })

@@ -12,7 +12,7 @@
     <!-- <%-include -%> LES TIRETS SONT UNIQUEMENT POUR LES "INCLUDE" -->
     <div class="central">
     <h1><%= title %></h1>
-    <div>
+    <div class="french-movies">
         <% for (movie of movies) { %>
             <div><%= movie.title %> <%= movie.year %></div>
         <%} %>
@@ -28,5 +28,35 @@
     </form>
     </div> 
     <%- include ("./Partials/footer") -%>
+    <script>
+        const form = document.querySelector("form");
+        form.addEventListener("submit", addMovie);
+        function addMovie(e) {
+            e.preventDefault();
+
+            if (fetch) {
+                fetch("/movies", {
+                    method: "POST",
+                    body: new FormData(form)
+                })
+                .then(checkStatus)
+                .catch(function(error){
+                    console.error("request failed", error);
+                })
+            } else {
+
+            }
+        }
+        function checkStatus(response) {
+            if (response.status >= 200 && response.status > 300) {
+                let newMoviesDiv = document.createElement("div");
+                const movietitle = document.getElementById("movietitle").value;
+                const movieyear = document.getElementById("movieyear").value;
+                newMoviesDiv.innerHTML = `${movietitle} ${movieyear}`;
+                document.querySelector(".french-movies").appendChild(newMoviesDiv);
+                form.reset()
+            }
+        }
+    </script>
 </body>
 </html>

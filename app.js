@@ -3,10 +3,11 @@ const app = express();
 const bodyParser = require("body-parser")
 
 const PORT = 3000;
+let frenchMovies = [];
 
 // UTILISATION DES MIDDLEWARE A L'AIDE DE LA METHODE USE()
 app.use("/public",express.static("public"))
-app.use(bodyParser.urlencoded({extended:false}))
+// app.use(bodyParser.urlencoded({extended:false}))
 
 // DECLARATION TEMPLATE ENGINE
 app.set("views", "./views");
@@ -15,7 +16,7 @@ app.set("view engine", "ejs");
 app.get("/movies", (req,res)=>{
     // res.send("Welcome to the movie page")
     const title = "Films francais de y'a pas lgt mon reuf"
-    const frenchMovies = [
+    frenchMovies = [
         {title : "Le fabuleux destin", year: 2001},
         {title : "Terminator", year: 1999},
         {title : "Saw", year: 2008},
@@ -24,8 +25,17 @@ app.get("/movies", (req,res)=>{
     res.render("movies", {movies:frenchMovies, title:title})
 })
 
-app.post("/movies", (req,res)=>{
-    req.body
+const urlencodedParser = bodyParser.urlencoded({extended:false});
+
+app.post("/movies",urlencodedParser, (req,res)=>{
+    console.log("Le titre est : ",req.body.movietitle);
+    console.log("L'année est : ",req.body.movieyear);
+    const newMovie = {title : req.body.movietitle, year : parseInt(req.body.movieyear)};
+    frenchMovies = [...frenchMovies,newMovie];
+    // frenchMovies.push(newMovie);
+    console.log(frenchMovies);
+
+    res.sendStatus(201);
 })
 
 // FAIRE ATTENTION A L'ORDRE DES ROUTES

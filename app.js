@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser")
+
 const PORT = 3000;
 
 // UTILISATION DES MIDDLEWARE A L'AIDE DE LA METHODE USE()
 app.use("/public",express.static("public"))
-
+app.use(bodyParser.urlencoded({extended:false}))
 
 // DECLARATION TEMPLATE ENGINE
 app.set("views", "./views");
@@ -14,13 +16,16 @@ app.get("/movies", (req,res)=>{
     // res.send("Welcome to the movie page")
     const title = "Films francais de y'a pas lgt mon reuf"
     const frenchMovies = [
-
         {title : "Le fabuleux destin", year: 2001},
         {title : "Terminator", year: 1999},
         {title : "Saw", year: 2008},
         {title : "Le diner de cons", year: 2057}
     ]
     res.render("movies", {movies:frenchMovies, title:title})
+})
+
+app.post("/movies", (req,res)=>{
+    req.body
 })
 
 // FAIRE ATTENTION A L'ORDRE DES ROUTES
